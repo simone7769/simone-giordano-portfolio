@@ -56,6 +56,9 @@
     --ink: #000000;
     --ink-soft: #666666;
     --line: #e5e5e5;
+    --header-h: 84px; /* fallback iniziale; il valore reale viene impostato via JS
+                          in base all'altezza effettiva dell'header (che cambia se
+                          va su due righe sotto i 560px) */
     --font-wordmark: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     --font-serif: "Cormorant Garamond", Georgia, serif;
@@ -360,23 +363,75 @@
   }
 
   @media (max-width: 800px) {
-    .slide.intro-slide {
-      flex: 0 0 85vw;
-      width: 85vw;
+    .slider-wrapper {
+      height: auto;
+      width: 100%; /* era 100vw: su mobile, con lo slider-container passato a
+                       overflow:visible, l'eccedenza di 100vw (scrollbar ecc.)
+                       non è più contenuta e taglia le immagini ai lati */
     }
-    .slide.first-img-slide {
-      flex: 0 0 90vw;
-      width: 90vw;
-      padding: 40px 5vw 80px 5vw;
+
+    .slider-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      height: auto;
+      overflow: visible;
+      overscroll-behavior-x: auto;
+      scroll-snap-type: none;
+      gap: 72px; /* era 56px: più respiro tra uno slide e l'altro (solo mobile) */
+      padding: 16px 0 64px 0; /* era 8px 0 56px 0 */
     }
+
+    .slide,
+    .slide.intro-slide,
+    .slide.first-img-slide,
     .slide:not(.intro-slide):not(.first-img-slide) {
-      flex: 0 0 90vw;
-      width: 90vw;
-      padding: 40px 5vw 80px 5vw;
+      flex: none;
+      width: 100%;
+      height: auto;
+      min-height: 0;
+      scroll-snap-align: none;
+      min-width: 0; /* azzera i 300px ereditati dal CSS desktop */
+      padding: 0 8vw;
+      justify-content: center;
     }
+
+    .slide.intro-slide {
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    /* Riserva lo spazio dell'immagine PRIMA che si carichi (le immagini sono
+       loading="lazy" e senza width/height): senza questo, ogni immagine che
+       si carica durante uno scroll fa crescere la pagina sotto di sé, e uno
+       scroll lungo come "Contact" si ferma a metà gallery invece che in fondo. */
+    .slide.first-img-slide,
+    .slide:not(.intro-slide):not(.first-img-slide) {
+      min-height: 58vh;
+    }
+
+    .slide img {
+      max-height: 58vh;
+    }
+
     .slide-caption {
-      left: 5vw;
-      right: 5vw;
+      position: static;
+      margin-top: 22px; /* era 16px */
+      left: auto;
+      right: auto;
+      bottom: auto;
+      max-width: 100%;
+    }
+
+    .slider-nav {
+      display: none;
+    }
+
+    /* Compensa l'header fisso solo su mobile (su desktop non c'era prima e
+       interferiva con lo scrollIntoView tra le gallery a schermo intero). */
+    section[id] {
+      scroll-margin-top: calc(var(--header-h) + 12px);
     }
   }
 
@@ -838,6 +893,14 @@
 </footer>
 
 <script>
+  // Deve restare uguale al breakpoint usato in CSS per .slider-wrapper / .slider-nav
+  // (cerca "@media (max-width: 800px)" nel <style> qui sopra). Se cambi uno dei due,
+  // cambia anche l'altro.
+  const MOBILE_BREAKPOINT_QUERY = '(max-width: 800px)';
+  function isMobileLayout() {
+    return window.matchMedia(MOBILE_BREAKPOINT_QUERY).matches;
+  }
+
   function getClosestSlideIndex(slider, slides) {
     const currentScroll = slider.scrollLeft;
     const maxScroll = slider.scrollWidth - slider.clientWidth;
@@ -860,6 +923,7 @@
   }
 
   function moveSlide(btn, direction) {
+    if (isMobileLayout()) return;
     const section = btn.closest('section');
     const slider = section.querySelector('.slider-container');
     if (!slider) return;
@@ -909,6 +973,22 @@
   }
 
   document.addEventListener("DOMContentLoaded", () => {
+    // Altezza reale dell'header per compensare correttamente lo scroll alle
+    // ancore, anche quando l'header va su due righe (schermi stretti).
+    const siteHeader = document.querySelector('header.site-nav');
+    function updateHeaderHeightVar() {
+      if (siteHeader) {
+        document.documentElement.style.setProperty('--header-h', siteHeader.offsetHeight + 'px');
+      }
+    }
+    updateHeaderHeightVar();
+    let headerResizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(headerResizeTimeout);
+      headerResizeTimeout = setTimeout(updateHeaderHeightVar, 120);
+    });
+    window.addEventListener('orientationchange', updateHeaderHeightVar);
+
     const yearEl = document.getElementById('copyright-year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
@@ -964,6 +1044,7 @@
     gallerySections.forEach(section => sectionState.set(section, { needsReset: false }));
 
     function resetGallery(section) {
+      if (isMobileLayout()) return;
       const slider = section.querySelector('.slider-container');
       if (!slider) return;
 
@@ -1002,6 +1083,7 @@
       slider.dataset.currentIndex = 0;
       let scrollTimeout;
       slider.addEventListener('scroll', () => {
+        if (isMobileLayout()) return;
         if (slider.dataset.navigating === '1') return;
         clearTimeout(scrollTimeout);
         scrollTimeout = setTimeout(() => {
@@ -1014,6 +1096,7 @@
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(() => {
+        if (isMobileLayout()) return;
         gallerySections.forEach(section => {
           const slider = section.querySelector('.slider-container');
           if (!slider) return;
