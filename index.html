@@ -192,8 +192,6 @@
     border: 1px solid var(--line);
     box-shadow: 0 12px 30px rgba(0,0,0,0.06);
   }
-  .nav-item:hover .dropdown,
-  .nav-item:focus-within .dropdown,
   .nav-item .dropdown.open { display: flex; }
   .dropdown a {
     padding: 9px 16px;
@@ -1063,13 +1061,25 @@
         }
       });
       if (worksNavItem) {
-        worksNavItem.addEventListener('mouseenter', () => worksToggle.setAttribute('aria-expanded', 'true'));
-        worksNavItem.addEventListener('mouseleave', () => {
-          if (!worksDropdown.classList.contains('open')) worksToggle.setAttribute('aria-expanded', 'false');
+        worksNavItem.addEventListener('mouseenter', () => {
+          if (window.matchMedia('(hover: none)').matches) return;
+          worksDropdown.classList.add('open');
+          worksToggle.setAttribute('aria-expanded', 'true');
         });
-        worksNavItem.addEventListener('focusin', () => worksToggle.setAttribute('aria-expanded', 'true'));
+        worksNavItem.addEventListener('mouseleave', () => {
+          if (window.matchMedia('(hover: none)').matches) return;
+          worksDropdown.classList.remove('open');
+          worksToggle.setAttribute('aria-expanded', 'false');
+        });
+        worksNavItem.addEventListener('focusin', () => {
+          if (window.matchMedia('(hover: none)').matches) return;
+          worksDropdown.classList.add('open');
+          worksToggle.setAttribute('aria-expanded', 'true');
+        });
         worksNavItem.addEventListener('focusout', (e) => {
-          if (!worksNavItem.contains(e.relatedTarget) && !worksDropdown.classList.contains('open')) {
+          if (window.matchMedia('(hover: none)').matches) return;
+          if (!worksNavItem.contains(e.relatedTarget)) {
+            worksDropdown.classList.remove('open');
             worksToggle.setAttribute('aria-expanded', 'false');
           }
         });
