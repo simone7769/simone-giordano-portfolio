@@ -9,7 +9,7 @@
 <meta name="author" content="Simone Giordano">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.simonegiordano.net/">
-<meta name="theme-color" content="#fcfcfc">
+<meta name="theme-color" content="#ffffff">
 
 <!-- Open Graph / Twitter Card -->
 <meta property="og:type" content="website">
@@ -32,12 +32,12 @@
 
 <!-- Favicon -->
 <link rel="icon" href="favicon.ico" sizes="any">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%23fcfcfc%22/%3E%3Ctext x=%2250%22 y=%2257%22 font-family=%22-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif%22 font-weight=%22900%22 font-size=%2242%22 fill=%22%23000000%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3ESG%3C/text%3E%3C/svg%3E" type="image/svg+xml">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%23ffffff%22/%3E%3Ctext x=%2250%22 y=%2257%22 font-family=%22-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif%22 font-weight=%22900%22 font-size=%2242%22 fill=%22%23000000%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3ESG%3C/text%3E%3C/svg%3E" type="image/svg+xml">
 
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..900&family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 
 <!-- Structured Data (JSON-LD) -->
 <script type="application/ld+json">
@@ -58,12 +58,12 @@
 
 <style>
   :root {
-    --paper: #fcfcfc;
+    --paper: #ffffff;
     --ink: #000000;
     --ink-soft: #666666;
     --line: #e5e5e5;
     --header-h: 84px;
-    --font-wordmark: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-wordmark: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     --font-serif: "Cormorant Garamond", Georgia, serif;
   }
@@ -92,7 +92,7 @@
 
   h1, .nav-name {
     font-family: var(--font-wordmark);
-    font-weight: 900;
+    font-weight: 850;
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
@@ -148,14 +148,14 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px 5vw;
-    background: rgba(252, 252, 252, 0.85);
+    background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(0,0,0,0.05);
   }
 
   .nav-name {
-    font-weight: 800;
+    font-weight: 850;
     font-size: 17px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -188,9 +188,10 @@
     left: 0;
     min-width: 150px;
     padding: 8px 0;
-    background: var(--paper);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border: 1px solid var(--line);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.06);
   }
   .nav-item .dropdown.open { display: flex; }
   .dropdown a {
@@ -200,9 +201,12 @@
     text-transform: uppercase;
     text-decoration: none;
     white-space: nowrap;
-    transition: background .15s ease;
+    transition: opacity .15s ease;
   }
-  .dropdown a:hover { background: #f0f0f0; }
+  .dropdown a:hover { 
+    background: transparent; 
+    opacity: 0.5; 
+  }
 
   /* ---------- Hero Section ---------- */
   .hero {
@@ -221,17 +225,27 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(252,252,252,0.55);
+    background: rgba(255, 255, 255, 0.55);
   }
   .hero > * {
     position: relative;
     z-index: 1;
   }
   .hero h1 {
-    font-size: clamp(26px, 4vw, 52px);
-    margin: 16px 0;
+    font-size: clamp(26px, 3.9vw, 48px);
+    margin: 16px 0 8px 0;
     color: var(--ink);
     padding-left: 0.05em;
+    letter-spacing: 0.035em;
+  }
+  .hero-subtitle {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 19px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-top: 0;
+    margin-bottom: 16px;
   }
 
   .scroll-hint {
@@ -244,7 +258,9 @@
     text-decoration: none;
     line-height: 1;
     padding: 10px;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     transition: color 0.2s ease, transform 0.2s ease;
   }
   .scroll-hint:hover {
@@ -313,7 +329,6 @@
     max-width: 100%;
     max-height: calc(100vh - 160px);
     object-fit: contain;
-    mix-blend-mode: multiply; /* Fonde il margine bianco puro #ffffff con lo sfondo #fcfcfc */
   }
 
   .slide-caption {
@@ -330,6 +345,13 @@
     color: var(--ink-soft);
     letter-spacing: 0.05em;
     flex-wrap: wrap;
+  }
+
+  .slide-counter {
+    margin-left: 8px;
+    font-size: 11px;
+    opacity: 0.7;
+    font-variant-numeric: tabular-nums;
   }
 
   .intro-slide .intro-inner {
@@ -620,15 +642,16 @@
   <!-- HERO -->
   <section class="hero">
     <h1>Simone Giordano</h1>
-    <a href="#gradients" class="scroll-hint" aria-label="Scroll to gallery">&darr;</a>
+    <p class="hero-subtitle">Painter &mdash; Rome</p>
+    <a href="#gradients" class="scroll-hint" aria-label="Scroll to gallery"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="4" x2="12" y2="18"></line><polyline points="6 12 12 18 18 12"></polyline></svg></a>
   </section>
 
   <!-- GALLERIA: GRADIENTS -->
   <section id="gradients">
     <div class="slider-wrapper">
       <div class="slider-nav">
-        <button class="nav-btn" data-direction="-1" aria-label="Previous slide for Gradients">&larr;</button>
-        <button class="nav-btn" data-direction="1" aria-label="Next slide for Gradients">&rarr;</button>
+        <button class="nav-btn" data-direction="-1" aria-label="Previous slide for Gradients"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="20" y1="12" x2="6" y2="12"></line><polyline points="12 6 6 12 12 18"></polyline></svg></button>
+        <button class="nav-btn" data-direction="1" aria-label="Next slide for Gradients"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="18" y2="12"></line><polyline points="12 6 18 12 12 18"></polyline></svg></button>
       </div>
       <div class="slider-container">
         <div class="slide intro-slide">
@@ -639,35 +662,35 @@
         </div>
         <div class="slide first-img-slide">
           <img src="img/gradients-01.jpg" width="1215" height="1215" alt="FForward" fetchpriority="high" decoding="async">
-          <div class="slide-caption"><strong>FForward</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2014, Oil on canvas, 50 × 40 cm</span></div>
+          <div class="slide-caption"><strong>FForward</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2014, Oil on canvas, 50 × 40 cm<span class="slide-counter">01 / 08</span></span></div>
         </div>
         <div class="slide">
           <img src="img/gradients-02.jpg" width="961" height="1200" alt="Keep Calm" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>Keep Calm</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2014, Oil on canvas, 50 × 50 cm</span></div>
+          <div class="slide-caption"><strong>Keep Calm</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2014, Oil on canvas, 50 × 50 cm<span class="slide-counter">02 / 08</span></span></div>
         </div>
         <div class="slide">
           <img src="img/gradients-03.jpg" width="1749" height="1215" alt="Preimposed Order" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>Preimposed Order</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2013, Oil on canvas, 120 × 70 cm</span></div>
+          <div class="slide-caption"><strong>Preimposed Order</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2013, Oil on canvas, 120 × 70 cm<span class="slide-counter">03 / 08</span></span></div>
         </div>
         <div class="slide">
           <img src="img/gradients-04.jpg" width="1696" height="1215" alt="Trying to Forget" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>Trying to Forget</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2014, Oil on panel, 70 × 50 cm</span></div>
+          <div class="slide-caption"><strong>Trying to Forget</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2014, Oil on panel, 70 × 50 cm<span class="slide-counter">04 / 08</span></span></div>
         </div>
         <div class="slide">
           <img src="img/gradients-05.jpg" width="974" height="1215" alt="Undrawing" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>Undrawing</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2014, Oil on canvas, 50 × 40 cm</span></div>
+          <div class="slide-caption"><strong>Undrawing</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2014, Oil on canvas, 50 × 40 cm<span class="slide-counter">05 / 08</span></span></div>
         </div>
         <div class="slide">
           <img src="img/gradients-06.jpg" width="1629" height="1215" alt="Again and Again and Again an…" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>Again and Again and Again an…</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2014, Oil on canvas, 40 × 30 cm</span></div>
+          <div class="slide-caption"><strong>Again and Again and Again an…</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2014, Oil on canvas, 40 × 30 cm<span class="slide-counter">06 / 08</span></span></div>
         </div>
         <div class="slide">
           <img src="img/gradients-07.jpg" width="1659" height="1215" alt="Raw Glitch Experiment 01" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>Raw Glitch Experiment 01</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2014, Oil on canvas, 40 × 60 cm</span></div>
+          <div class="slide-caption"><strong>Raw Glitch Experiment 01</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2014, Oil on canvas, 40 × 60 cm<span class="slide-counter">07 / 08</span></span></div>
         </div>
         <div class="slide">
           <img src="img/gradients-08.jpg" width="2739" height="1215" alt="Raw Glitch Experiment 02" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>Raw Glitch Experiment 02</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2014, Oil on canvas, 50 × 110 cm</span></div>
+          <div class="slide-caption"><strong>Raw Glitch Experiment 02</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2014, Oil on canvas, 50 × 110 cm<span class="slide-counter">08 / 08</span></span></div>
         </div>
       </div>
     </div>
@@ -677,8 +700,8 @@
   <section id="smokes">
     <div class="slider-wrapper">
       <div class="slider-nav">
-        <button class="nav-btn" data-direction="-1" aria-label="Previous slide for Smokes">&larr;</button>
-        <button class="nav-btn" data-direction="1" aria-label="Next slide for Smokes">&rarr;</button>
+        <button class="nav-btn" data-direction="-1" aria-label="Previous slide for Smokes"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="20" y1="12" x2="6" y2="12"></line><polyline points="12 6 6 12 12 18"></polyline></svg></button>
+        <button class="nav-btn" data-direction="1" aria-label="Next slide for Smokes"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="18" y2="12"></line><polyline points="12 6 18 12 12 18"></polyline></svg></button>
       </div>
       <div class="slider-container">
         <div class="slide intro-slide">
@@ -689,23 +712,23 @@
         </div>
         <div class="slide first-img-slide">
           <img src="img/smokes-01.jpg" width="1215" height="1215" alt="496" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>496</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2013, Oil on canvas, 60 × 40 cm</span></div>
+          <div class="slide-caption"><strong>496</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2013, Oil on canvas, 60 × 40 cm<span class="slide-counter">01 / 05</span></span></div>
         </div>
         <div class="slide">
           <img src="img/smokes-02.jpg" width="1014" height="1215" alt="952" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>952</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2013, Oil on canvas, 70 × 50 cm</span></div>
+          <div class="slide-caption"><strong>952</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2013, Oil on canvas, 70 × 50 cm<span class="slide-counter">02 / 05</span></span></div>
         </div>
         <div class="slide">
           <img src="img/smokes-03.jpg" width="1578" height="1250" alt="Kiss Inger" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>Kiss Inger</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2013, Oil on canvas, 70 × 50 cm</span></div>
+          <div class="slide-caption"><strong>Kiss Inger</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2013, Oil on canvas, 70 × 50 cm<span class="slide-counter">03 / 05</span></span></div>
         </div>
         <div class="slide">
           <img src="img/smokes-04.jpg" width="1037" height="1215" alt="398" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>398</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2013, Oil on canvas, 70 × 50 cm</span></div>
+          <div class="slide-caption"><strong>398</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2013, Oil on canvas, 70 × 50 cm<span class="slide-counter">04 / 05</span></span></div>
         </div>
         <div class="slide">
           <img src="img/smokes-05.jpg" width="961" height="1215" alt="441" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>441</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2013, Oil on canvas, 40 × 40 cm</span></div>
+          <div class="slide-caption"><strong>441</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2013, Oil on canvas, 40 × 40 cm<span class="slide-counter">05 / 05</span></span></div>
         </div>
       </div>
     </div>
@@ -715,8 +738,8 @@
   <section id="techs">
     <div class="slider-wrapper">
       <div class="slider-nav">
-        <button class="nav-btn" data-direction="-1" aria-label="Previous slide for Techs">&larr;</button>
-        <button class="nav-btn" data-direction="1" aria-label="Next slide for Techs">&rarr;</button>
+        <button class="nav-btn" data-direction="-1" aria-label="Previous slide for Techs"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="20" y1="12" x2="6" y2="12"></line><polyline points="12 6 6 12 12 18"></polyline></svg></button>
+        <button class="nav-btn" data-direction="1" aria-label="Next slide for Techs"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="18" y2="12"></line><polyline points="12 6 18 12 12 18"></polyline></svg></button>
       </div>
       <div class="slider-container">
         <div class="slide intro-slide">
@@ -727,63 +750,63 @@
         </div>
         <div class="slide first-img-slide">
           <img src="img/techs-01.jpg" width="1215" height="1215" alt="Tangless" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>Tangless</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on canvas on board, 30 × 30 cm</span></div>
+          <div class="slide-caption"><strong>Tangless</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on canvas on board, 30 × 30 cm<span class="slide-counter">01 / 15</span></span></div>
         </div>
         <div class="slide">
           <img src="img/techs-02.jpg" width="971" height="1215" alt="Made to Sedate" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>Made to Sedate</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on Mylar, 120 × 160 cm</span></div>
+          <div class="slide-caption"><strong>Made to Sedate</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on Mylar, 120 × 160 cm<span class="slide-counter">02 / 15</span></span></div>
         </div>
         <div class="slide">
           <img src="img/techs-03.jpg" width="1569" height="1215" alt="Burned" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>Burned</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on Mylar, 40 × 30 cm</span></div>
+          <div class="slide-caption"><strong>Burned</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on Mylar, 40 × 30 cm<span class="slide-counter">03 / 15</span></span></div>
         </div>
         <div class="slide">
           <img src="img/techs-04.jpg" width="1642" height="1215" alt="Spring" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>Spring</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on Mylar, 40 × 30 cm</span></div>
+          <div class="slide-caption"><strong>Spring</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on Mylar, 40 × 30 cm<span class="slide-counter">04 / 15</span></span></div>
         </div>
         <div class="slide">
           <img src="img/techs-05.jpg" width="971" height="1215" alt="My Left Hand" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>My Left Hand</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on Mylar, 60 × 60 cm</span></div>
+          <div class="slide-caption"><strong>My Left Hand</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on Mylar, 60 × 60 cm<span class="slide-counter">05 / 15</span></span></div>
         </div>
         <div class="slide">
           <img src="img/techs-06.jpg" width="1704" height="1215" alt="This Is How I'm Made" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>This Is How I'm Made</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on canvas on board, 35 × 25 cm</span></div>
+          <div class="slide-caption"><strong>This Is How I'm Made</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on canvas on board, 35 × 25 cm<span class="slide-counter">06 / 15</span></span></div>
         </div>
         <div class="slide">
           <img src="img/techs-07.jpg" width="1172" height="1215" alt="Bugs" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>Bugs</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on canvas on board, 30 × 30 cm</span></div>
+          <div class="slide-caption"><strong>Bugs</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on canvas on board, 30 × 30 cm<span class="slide-counter">07 / 15</span></span></div>
         </div>
         <div class="slide">
           <img src="img/techs-08.jpg" width="1230" height="1215" alt="The Origin of the World" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>The Origin of the World</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on canvas on board, 30 × 30 cm</span></div>
+          <div class="slide-caption"><strong>The Origin of the World</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on canvas on board, 30 × 30 cm<span class="slide-counter">08 / 15</span></span></div>
         </div>
         <div class="slide">
           <img src="img/techs-09.jpg" width="1225" height="1215" alt="Sick Mama" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>Sick Mama</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on canvas on board, 30 × 30 cm</span></div>
+          <div class="slide-caption"><strong>Sick Mama</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on canvas on board, 30 × 30 cm<span class="slide-counter">09 / 15</span></span></div>
         </div>
         <div class="slide">
           <img src="img/techs-10.jpg" width="1234" height="1215" alt="Entertainm3nt" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>Entertainm3nt</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on canvas on board, 30 × 30 cm</span></div>
+          <div class="slide-caption"><strong>Entertainm3nt</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on canvas on board, 30 × 30 cm<span class="slide-counter">10 / 15</span></span></div>
         </div>
         <div class="slide">
           <img src="img/techs-11.jpg" width="1215" height="1215" alt="And My Friend" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>And My Friend</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on board, 30 × 30 cm</span></div>
+          <div class="slide-caption"><strong>And My Friend</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on board, 30 × 30 cm<span class="slide-counter">11 / 15</span></span></div>
         </div>
         <div class="slide">
           <img src="img/techs-12.jpg" width="1219" height="1215" alt="First Love" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>First Love</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on board, 30 × 30 cm</span></div>
+          <div class="slide-caption"><strong>First Love</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on board, 30 × 30 cm<span class="slide-counter">12 / 15</span></span></div>
         </div>
         <div class="slide">
           <img src="img/techs-13.jpg" width="1215" height="1215" alt="Time Is Everything" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>Time Is Everything</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on board, 30 × 30 cm</span></div>
+          <div class="slide-caption"><strong>Time Is Everything</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on board, 30 × 30 cm<span class="slide-counter">13 / 15</span></span></div>
         </div>
         <div class="slide">
           <img src="img/techs-14.jpg" width="2268" height="1215" alt="Bete" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>Bete</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on board, 100 × 15 cm</span></div>
+          <div class="slide-caption"><strong>Bete</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on board, 100 × 15 cm<span class="slide-counter">14 / 15</span></span></div>
         </div>
         <div class="slide">
           <img src="img/techs-15.jpg" width="1549" height="1215" alt="No Longer" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>No Longer</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on canvas, 70 × 50 cm</span></div>
+          <div class="slide-caption"><strong>No Longer</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on canvas, 70 × 50 cm<span class="slide-counter">15 / 15</span></span></div>
         </div>
       </div>
     </div>
@@ -793,8 +816,8 @@
   <section id="memories">
     <div class="slider-wrapper">
       <div class="slider-nav">
-        <button class="nav-btn" data-direction="-1" aria-label="Previous slide for Memories">&larr;</button>
-        <button class="nav-btn" data-direction="1" aria-label="Next slide for Memories">&rarr;</button>
+        <button class="nav-btn" data-direction="-1" aria-label="Previous slide for Memories"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="20" y1="12" x2="6" y2="12"></line><polyline points="12 6 6 12 12 18"></polyline></svg></button>
+        <button class="nav-btn" data-direction="1" aria-label="Next slide for Memories"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="18" y2="12"></line><polyline points="12 6 18 12 12 18"></polyline></svg></button>
       </div>
       <div class="slider-container">
         <div class="slide intro-slide">
@@ -805,67 +828,67 @@
         </div>
         <div class="slide first-img-slide">
           <img src="img/memories-01.jpg" width="1215" height="1215" alt="First" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>First</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2011, Oil on board, 30 × 30 cm</span></div>
+          <div class="slide-caption"><strong>First</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2011, Oil on board, 30 × 30 cm<span class="slide-counter">01 / 16</span></span></div>
         </div>
         <div class="slide">
           <img src="img/memories-02.jpg" width="1674" height="1215" alt="Where I End and You Begin" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>Where I End and You Begin</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2013, Oil on canvas, 190 × 150 cm</span></div>
+          <div class="slide-caption"><strong>Where I End and You Begin</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2013, Oil on canvas, 190 × 150 cm<span class="slide-counter">02 / 16</span></span></div>
         </div>
         <div class="slide">
           <img src="img/memories-03.jpg" width="1213" height="1215" alt="Carry Me On" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>Carry Me On</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2011, Oil on board, 30 × 30 cm</span></div>
+          <div class="slide-caption"><strong>Carry Me On</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2011, Oil on board, 30 × 30 cm<span class="slide-counter">03 / 16</span></span></div>
         </div>
         <div class="slide">
           <img src="img/memories-04.jpg" width="1209" height="1215" alt="Great" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>Great</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on board, 30 × 30 cm</span></div>
+          <div class="slide-caption"><strong>Great</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on board, 30 × 30 cm<span class="slide-counter">04 / 16</span></span></div>
         </div>
         <div class="slide">
           <img src="img/memories-05.jpg" width="1212" height="1215" alt="GranMa" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>GranMa</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2011, Oil on board, 30 × 30 cm</span></div>
+          <div class="slide-caption"><strong>GranMa</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2011, Oil on board, 30 × 30 cm<span class="slide-counter">05 / 16</span></span></div>
         </div>
         <div class="slide">
           <img src="img/memories-06.jpg" width="1217" height="1215" alt="First Time I Meet Death" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>First Time I Meet Death</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2011, Oil on board, 30 × 30 cm</span></div>
+          <div class="slide-caption"><strong>First Time I Meet Death</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2011, Oil on board, 30 × 30 cm<span class="slide-counter">06 / 16</span></span></div>
         </div>
         <div class="slide">
           <img src="img/memories-07.jpg" width="1225" height="1215" alt="Always" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>Always</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2013, Oil on board, 30 × 30 cm</span></div>
+          <div class="slide-caption"><strong>Always</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2013, Oil on board, 30 × 30 cm<span class="slide-counter">07 / 16</span></span></div>
         </div>
         <div class="slide">
           <img src="img/memories-08.jpg" width="1215" height="1215" alt="Starry" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>Starry</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2011, Oil on board, 30 × 30 cm</span></div>
+          <div class="slide-caption"><strong>Starry</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2011, Oil on board, 30 × 30 cm<span class="slide-counter">08 / 16</span></span></div>
         </div>
         <div class="slide">
           <img src="img/memories-09.jpg" width="1202" height="1215" alt="Friend" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>Friend</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on board, 30 × 30 cm</span></div>
+          <div class="slide-caption"><strong>Friend</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on board, 30 × 30 cm<span class="slide-counter">09 / 16</span></span></div>
         </div>
         <div class="slide">
           <img src="img/memories-10.jpg" width="1225" height="1215" alt="Unforgettable" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>Unforgettable</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2011, Oil on board, 30 × 30 cm</span></div>
+          <div class="slide-caption"><strong>Unforgettable</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2011, Oil on board, 30 × 30 cm<span class="slide-counter">10 / 16</span></span></div>
         </div>
         <div class="slide">
           <img src="img/memories-11.jpg" width="1212" height="1215" alt="Fake" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>Fake</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on board, 30 × 30 cm</span></div>
+          <div class="slide-caption"><strong>Fake</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on board, 30 × 30 cm<span class="slide-counter">11 / 16</span></span></div>
         </div>
         <div class="slide">
           <img src="img/memories-12.jpg" width="1214" height="1215" alt="Puglia" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>Puglia</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2011, Oil on board, 30 × 30 cm</span></div>
+          <div class="slide-caption"><strong>Puglia</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2011, Oil on board, 30 × 30 cm<span class="slide-counter">12 / 16</span></span></div>
         </div>
         <div class="slide">
           <img src="img/memories-13.jpg" width="1236" height="1215" alt="Enough" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>Enough</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2011, Oil on board, 30 × 30 cm</span></div>
+          <div class="slide-caption"><strong>Enough</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2011, Oil on board, 30 × 30 cm<span class="slide-counter">13 / 16</span></span></div>
         </div>
         <div class="slide">
           <img src="img/memories-14.jpg" width="1201" height="1215" alt="Where" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>Where</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2011, Oil on board, 30 × 30 cm</span></div>
+          <div class="slide-caption"><strong>Where</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2011, Oil on board, 30 × 30 cm<span class="slide-counter">14 / 16</span></span></div>
         </div>
         <div class="slide">
           <img src="img/memories-15.jpg" width="1207" height="1215" alt="All" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>All</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2011, Oil on board, 30 × 30 cm</span></div>
+          <div class="slide-caption"><strong>All</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2011, Oil on board, 30 × 30 cm<span class="slide-counter">15 / 16</span></span></div>
         </div>
         <div class="slide">
           <img src="img/memories-16.jpg" width="1232" height="1215" alt="You" loading="lazy" decoding="async">
-          <div class="slide-caption"><strong>You</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2013, Oil on canvas, 190 × 150 cm</span></div>
+          <div class="slide-caption"><strong>You</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2013, Oil on canvas, 190 × 150 cm<span class="slide-counter">16 / 16</span></span></div>
         </div>
       </div>
     </div>
