@@ -333,9 +333,6 @@
     position: relative;
     z-index: 1;
   }
-  @media (hover: hover) and (pointer: fine) {
-    .hero.scroll-zone-active { cursor: none; }
-  }
   .sr-only {
     position: absolute;
     width: 1px;
@@ -369,54 +366,6 @@
     scrollbar-width: none;
   }
   .slider-container::-webkit-scrollbar { display: none; }
-
-  @media (hover: hover) and (pointer: fine) {
-    .slider-container { cursor: none; }
-  }
-
-  /* ---------- Custom drag cursor (desktop only) ---------- */
-  .custom-cursor {
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-    font-family: var(--font-nav);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #fff;
-    mix-blend-mode: difference;
-    pointer-events: none;
-    z-index: 2000;
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.7);
-    transition: opacity .2s ease, transform .2s ease;
-  }
-  .custom-cursor.visible {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-  }
-
-  /* Nella hero, l'etichetta "Scroll ↓" resta fissa e centrata, alla stessa
-     altezza del menu Bio/Contact (bottom: 40px), invece di seguire il
-     puntatore come fa l'etichetta "Drag" nelle gallerie. */
-  .hero.scroll-zone-active .custom-cursor {
-    left: 50% !important;
-    top: auto !important;
-    bottom: 40px;
-    transform: translate(-50%, 0) scale(0.7);
-  }
-  .hero.scroll-zone-active .custom-cursor.visible {
-    transform: translate(-50%, 0) scale(1);
-  }
-  @media (hover: none), (pointer: coarse) {
-    .custom-cursor { display: none !important; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .custom-cursor { transition: opacity .2s ease; }
-  }
 
   .slide {
     height: 100%;
@@ -534,7 +483,6 @@
     transform: translateY(-50%);
     background: transparent;
     border: none;
-    padding: 14px 18px;
     cursor: pointer;
     pointer-events: auto;
     font-family: var(--font-nav);
@@ -546,12 +494,49 @@
     opacity: 0;
     transition: color 0.2s ease, opacity 0.25s ease;
   }
-  .nav-btn[data-direction="-1"] { left: 8px; }
-  .nav-btn[data-direction="1"] { right: 8px; }
+  .nav-btn[data-direction="-1"] {
+    left: 6vw;
+    text-align: left;
+    padding: 14px 24px 14px 0;
+  }
+  .nav-btn[data-direction="1"] {
+    right: 6vw;
+    text-align: right;
+    padding: 14px 0 14px 24px;
+  }
 
-  .slider-wrapper:hover .nav-btn,
+  .slider-wrapper.drag-zone-left .nav-btn[data-direction="-1"],
+  .slider-wrapper.drag-zone-right .nav-btn[data-direction="1"],
   .nav-btn:focus-visible {
     opacity: 1;
+  }
+
+  .scroll-hint-btn {
+    position: fixed;
+    left: 50%;
+    bottom: 40px;
+    transform: translateX(-50%);
+    background: transparent;
+    border: none;
+    padding: 0 18px;
+    cursor: pointer;
+    font-family: var(--font-nav);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--ink-soft);
+    opacity: 0;
+    transition: color 0.2s ease, opacity 0.25s ease;
+  }
+
+  .hero.scroll-zone-active .scroll-hint-btn,
+  .scroll-hint-btn:focus-visible {
+    opacity: 1;
+  }
+
+  .scroll-hint-btn:hover {
+    color: var(--ink);
   }
 
   .nav-btn:hover {
@@ -969,6 +954,7 @@
   <!-- HERO -->
   <section class="hero">
     <h1 class="sr-only">Simone Giordano — Painter, Rome</h1>
+    <button type="button" class="scroll-hint-btn" aria-label="Scroll to next section">Scroll ↓</button>
   </section>
 
   <!-- GALLERIA: GRADIENTS -->
@@ -1281,7 +1267,6 @@
 
 </main>
 
-<div class="custom-cursor" id="custom-cursor" aria-hidden="true"><span id="custom-cursor-label">Drag ↔</span></div>
 
 <footer>
   © <span id="copyright-year"></span> Simone Giordano — All rights reserved
@@ -1404,10 +1389,6 @@
       });
     });
 
-    const customCursor = document.getElementById('custom-cursor');
-    const customCursorLabel = document.getElementById('custom-cursor-label');
-    const hoverCapable = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-
     document.querySelectorAll('.nav-btn[data-direction]').forEach((btn) => {
       btn.addEventListener('click', () => {
         moveSlide(btn, parseInt(btn.dataset.direction, 10));
@@ -1421,25 +1402,6 @@
         if (!img) return false;
         const imgRect = img.getBoundingClientRect();
         return e.clientY >= imgRect.top && e.clientY <= imgRect.bottom;
-      }
-
-      if (customCursor && hoverCapable && img) {
-        slide.addEventListener('mousemove', (e) => {
-          if (isOverImageBand(e)) {
-            if (customCursorLabel) {
-              const sliderContainer = slide.closest('.slider-container');
-              const refRect = (sliderContainer || slide).getBoundingClientRect();
-              const isLeftHalf = (e.clientX - refRect.left) < refRect.width / 2;
-              customCursorLabel.textContent = isLeftHalf ? '← Drag' : 'Drag →';
-            }
-            customCursor.classList.add('visible');
-          } else {
-            customCursor.classList.remove('visible');
-          }
-        });
-        slide.addEventListener('mouseleave', () => {
-          customCursor.classList.remove('visible');
-        });
       }
 
       slide.addEventListener('click', (e) => {
@@ -1466,7 +1428,44 @@
           nextSection.scrollIntoView({ behavior: scrollBehaviorFor(), block: 'start' });
         }
       });
+
+      // Mostra "Scroll ↓" solo quando il mouse/touch è nella metà bassa della hero
+      function updateHeroScrollZone(clientY) {
+        const rect = heroSection.getBoundingClientRect();
+        const inZone = clientY >= rect.top + rect.height / 2 && clientY <= rect.bottom;
+        heroSection.classList.toggle('scroll-zone-active', inZone);
+      }
+      heroSection.addEventListener('mousemove', (e) => updateHeroScrollZone(e.clientY));
+      heroSection.addEventListener('mouseleave', () => heroSection.classList.remove('scroll-zone-active'));
+      heroSection.addEventListener('touchstart', (e) => {
+        if (e.touches[0]) updateHeroScrollZone(e.touches[0].clientY);
+      }, { passive: true });
+      heroSection.addEventListener('touchmove', (e) => {
+        if (e.touches[0]) updateHeroScrollZone(e.touches[0].clientY);
+      }, { passive: true });
+      heroSection.addEventListener('touchend', () => heroSection.classList.remove('scroll-zone-active'));
     }
+
+    // Mostra "← Drag" / "Drag →" solo quando il mouse è nel margine
+    // laterale a sinistra/destra dell'immagine della galleria, non sopra l'immagine
+    document.querySelectorAll('.slider-wrapper').forEach((wrapper) => {
+      wrapper.addEventListener('mousemove', (e) => {
+        const target = document.elementFromPoint(e.clientX, e.clientY);
+        const overImage = target && target.tagName === 'IMG';
+        if (overImage) {
+          wrapper.classList.remove('drag-zone-left', 'drag-zone-right');
+          return;
+        }
+        const rect = wrapper.getBoundingClientRect();
+        const isLeftHalf = (e.clientX - rect.left) < rect.width / 2;
+        wrapper.classList.toggle('drag-zone-left', isLeftHalf);
+        wrapper.classList.toggle('drag-zone-right', !isLeftHalf);
+      });
+      wrapper.addEventListener('mouseleave', () => {
+        wrapper.classList.remove('drag-zone-left', 'drag-zone-right');
+      });
+    });
+
     const emailLink = document.getElementById('contact-email');
     if (emailLink && emailLink.dataset.user && emailLink.dataset.domain) {
       const address = emailLink.dataset.user + '@' + emailLink.dataset.domain;
@@ -1560,32 +1559,6 @@
           worksToggle.focus();
         }
       });
-    }
-
-    // ---------- Custom scroll cursor on hero (desktop only) ----------
-    if (customCursor && hoverCapable) {
-      if (heroSection) {
-        const HERO_SCROLL_ZONE_PX = 140;
-        heroSection.addEventListener('mousemove', (e) => {
-          const rect = heroSection.getBoundingClientRect();
-          const inZone = e.clientY >= rect.bottom - HERO_SCROLL_ZONE_PX;
-          heroSection.classList.toggle('scroll-zone-active', inZone);
-          if (inZone) {
-            if (customCursorLabel) customCursorLabel.textContent = 'Scroll ↓';
-            customCursor.classList.add('visible');
-          } else {
-            customCursor.classList.remove('visible');
-          }
-        });
-        heroSection.addEventListener('mouseleave', () => {
-          heroSection.classList.remove('scroll-zone-active');
-          customCursor.classList.remove('visible');
-        });
-      }
-      document.addEventListener('mousemove', (e) => {
-        customCursor.style.left = e.clientX + 'px';
-        customCursor.style.top = e.clientY + 'px';
-      }, { passive: true });
     }
 
     const gallerySections = Array.from(document.querySelectorAll('section'))
