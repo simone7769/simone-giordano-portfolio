@@ -30,6 +30,9 @@
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 
+<!-- Preload hero image (LCP) -->
+<link rel="preload" as="image" href="img/galerie-sator.jpg" fetchpriority="high">
+
 <!-- Favicon -->
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%23ffffff%22/%3E%3Ctext x=%2250%22 y=%2257%22 font-family=%22-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif%22 font-weight=%22900%22 font-size=%2242%22 fill=%22%23000000%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3ESG%3C/text%3E%3C/svg%3E" type="image/svg+xml">
@@ -196,7 +199,7 @@
   .nav-secondary { display: none; }
 
   /* ---------- Desktop-only header rework ---------- */
-  @media (min-width: 681px) {
+  @media (min-width: 801px) {
     header.site-nav,
     header.site-nav.at-top {
       background: transparent;
@@ -269,7 +272,7 @@
     opacity: 0.5; 
   }
 
-  @media (min-width: 681px) {
+  @media (min-width: 801px) {
     .nav-item .dropdown {
       background: transparent;
       backdrop-filter: none;
@@ -394,6 +397,19 @@
   .custom-cursor.visible {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
+  }
+
+  /* Nella hero, l'etichetta "Scroll ↓" resta fissa e centrata, alla stessa
+     altezza del menu Bio/Contact (bottom: 40px), invece di seguire il
+     puntatore come fa l'etichetta "Drag" nelle gallerie. */
+  .hero.scroll-zone-active .custom-cursor {
+    left: 50% !important;
+    top: auto !important;
+    bottom: 40px;
+    transform: translate(-50%, 0) scale(0.7);
+  }
+  .hero.scroll-zone-active .custom-cursor.visible {
+    transform: translate(-50%, 0) scale(1);
   }
   @media (hover: none), (pointer: coarse) {
     .custom-cursor { display: none !important; }
@@ -530,7 +546,7 @@
     transform: scale(1.15);
   }
 
-  @media (max-width: 680px) {
+  @media (max-width: 800px) {
     header.site-nav { padding: 16px 6vw; }
 
     .nav-toggle { display: flex; }
@@ -961,7 +977,7 @@
           </div>
         </div>
         <div class="slide first-img-slide">
-          <img src="img/gradients-01.jpg" width="1215" height="1215" alt="FForward" fetchpriority="high" decoding="async">
+          <img src="img/gradients-01.jpg" width="1215" height="1215" alt="FForward" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>FForward</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2014, Oil on canvas, 50 × 40 cm<span class="slide-counter">01 / 08</span></span></div>
         </div>
         <div class="slide">
@@ -1367,6 +1383,18 @@
     const yearEl = document.getElementById('copyright-year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+    // ---------- Contatori slide calcolati dinamicamente ----------
+    // Evita di dover aggiornare a mano "01 / 08" ecc. ogni volta che si
+    // aggiunge, toglie o riordina un'opera in una galleria.
+    document.querySelectorAll('.slider-container').forEach((slider) => {
+      const counters = Array.from(slider.querySelectorAll('.slide-counter'));
+      const total = counters.length;
+      const pad = (n) => String(n).padStart(2, '0');
+      counters.forEach((counter, i) => {
+        counter.textContent = `${pad(i + 1)} / ${pad(total)}`;
+      });
+    });
+
     const customCursor = document.getElementById('custom-cursor');
     const customCursorLabel = document.getElementById('custom-cursor-label');
     const hoverCapable = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
@@ -1439,7 +1467,7 @@
 
     const navToggle = document.getElementById('nav-toggle');
     const navLinks = document.getElementById('site-nav-links');
-    const mobileNavQuery = window.matchMedia('(max-width: 680px)');
+    const mobileNavQuery = window.matchMedia('(max-width: 800px)');
 
     function closeMobileNav() {
       if (!navToggle || !navLinks) return;
