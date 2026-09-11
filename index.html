@@ -525,22 +525,35 @@
   }
 
   .slider-nav {
-    display: none;
+    pointer-events: none;
   }
 
   .nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
     background: transparent;
     border: none;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 14px 18px;
     cursor: pointer;
     pointer-events: auto;
-    transition: color 0.2s ease, transform 0.2s ease;
-    font-size: 28px;
+    font-family: var(--font-nav);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
     color: var(--ink-soft);
+    opacity: 0;
+    transition: color 0.2s ease, opacity 0.25s ease;
   }
+  .nav-btn[data-direction="-1"] { left: 8px; }
+  .nav-btn[data-direction="1"] { right: 8px; }
+
+  .slider-wrapper:hover .nav-btn,
+  .nav-btn:focus-visible {
+    opacity: 1;
+  }
+
   .nav-btn:hover {
     color: var(--ink);
     transform: scale(1.15);
@@ -666,10 +679,6 @@
     }
 
     .slide-caption .cap-sep {
-      display: none;
-    }
-
-    .slider-nav {
       display: none;
     }
 
@@ -966,8 +975,8 @@
   <section id="gradients">
     <div class="slider-wrapper">
       <div class="slider-nav">
-        <button class="nav-btn" data-direction="-1" aria-label="Previous slide for Gradients"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="20" y1="12" x2="6" y2="12"></line><polyline points="12 6 6 12 12 18"></polyline></svg></button>
-        <button class="nav-btn" data-direction="1" aria-label="Next slide for Gradients"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="18" y2="12"></line><polyline points="12 6 18 12 12 18"></polyline></svg></button>
+        <button class="nav-btn" data-direction="-1" aria-label="Previous slide for Gradients">← Drag</button>
+        <button class="nav-btn" data-direction="1" aria-label="Next slide for Gradients">Drag →</button>
       </div>
       <div class="slider-container">
         <div class="slide intro-slide">
@@ -1016,8 +1025,8 @@
   <section id="smokes">
     <div class="slider-wrapper">
       <div class="slider-nav">
-        <button class="nav-btn" data-direction="-1" aria-label="Previous slide for Smokes"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="20" y1="12" x2="6" y2="12"></line><polyline points="12 6 6 12 12 18"></polyline></svg></button>
-        <button class="nav-btn" data-direction="1" aria-label="Next slide for Smokes"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="18" y2="12"></line><polyline points="12 6 18 12 12 18"></polyline></svg></button>
+        <button class="nav-btn" data-direction="-1" aria-label="Previous slide for Smokes">← Drag</button>
+        <button class="nav-btn" data-direction="1" aria-label="Next slide for Smokes">Drag →</button>
       </div>
       <div class="slider-container">
         <div class="slide intro-slide">
@@ -1054,8 +1063,8 @@
   <section id="techs">
     <div class="slider-wrapper">
       <div class="slider-nav">
-        <button class="nav-btn" data-direction="-1" aria-label="Previous slide for Techs"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="20" y1="12" x2="6" y2="12"></line><polyline points="12 6 6 12 12 18"></polyline></svg></button>
-        <button class="nav-btn" data-direction="1" aria-label="Next slide for Techs"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="18" y2="12"></line><polyline points="12 6 18 12 12 18"></polyline></svg></button>
+        <button class="nav-btn" data-direction="-1" aria-label="Previous slide for Techs">← Drag</button>
+        <button class="nav-btn" data-direction="1" aria-label="Next slide for Techs">Drag →</button>
       </div>
       <div class="slider-container">
         <div class="slide intro-slide">
@@ -1132,8 +1141,8 @@
   <section id="memories">
     <div class="slider-wrapper">
       <div class="slider-nav">
-        <button class="nav-btn" data-direction="-1" aria-label="Previous slide for Memories"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="20" y1="12" x2="6" y2="12"></line><polyline points="12 6 6 12 12 18"></polyline></svg></button>
-        <button class="nav-btn" data-direction="1" aria-label="Next slide for Memories"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="12" x2="18" y2="12"></line><polyline points="12 6 18 12 12 18"></polyline></svg></button>
+        <button class="nav-btn" data-direction="-1" aria-label="Previous slide for Memories">← Drag</button>
+        <button class="nav-btn" data-direction="1" aria-label="Next slide for Memories">Drag →</button>
       </div>
       <div class="slider-container">
         <div class="slide intro-slide">
