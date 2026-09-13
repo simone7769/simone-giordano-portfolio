@@ -161,10 +161,10 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px 6vw;
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.97);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(0,0,0,0.05);
+    border-bottom: 1px solid var(--line);
     transition: background .25s ease, backdrop-filter .25s ease, border-color .25s ease;
   }
 
@@ -630,14 +630,12 @@
     nav.links .nav-item { width: 100%; }
     nav.links > a {
       padding: 16px 0;
-      border-bottom: 1px solid var(--line);
     }
     nav.links .nav-item {
       flex-direction: column;
       align-items: stretch;
       padding-bottom: 0;
       margin-bottom: 0;
-      border-bottom: 1px solid var(--line);
     }
     nav.links .nav-item > a { padding: 16px 0 8px; }
 
