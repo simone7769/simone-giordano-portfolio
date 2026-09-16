@@ -33,6 +33,10 @@
 <!-- Preload hero image (LCP) -->
 <link rel="preload" as="image" href="img/galerie-sator-1200.webp" imagesrcset="img/galerie-sator-400.webp 400w, img/galerie-sator-800.webp 800w, img/galerie-sator-1200.webp 1200w" imagesizes="100vw" fetchpriority="high">
 
+<!-- Preload serif font (body text) -->
+<link rel="preload" as="font" type="font/woff2" href="fonts/newsreader-v23-latin-regular.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="fonts/newsreader-v23-latin-italic.woff2" crossorigin>
+
 <!-- Favicon -->
 <link rel="icon" href="favicon.ico?v=3" sizes="any">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%23ffffff%22/%3E%3Ctext x=%2250%22 y=%2257%22 font-family=%22-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif%22 font-weight=%22900%22 font-size=%2242%22 fill=%22%23000000%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3ESG%3C/text%3E%3C/svg%3E" type="image/svg+xml">
@@ -53,7 +57,6 @@
   "birthDate": "1977"
 }
 </script>
-
 <style>
   /* ---------- Font self-hosted ---------- */
   @font-face {
@@ -105,6 +108,21 @@
     font-display: swap;
     src: url('fonts/space-mono-v13-latin-700.woff2') format('woff2');
   }
+  @font-face {
+    font-family: 'Newsreader';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('fonts/newsreader-v23-latin-regular.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Newsreader';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url('fonts/newsreader-v23-latin-italic.woff2') format('woff2');
+  }
+
   :root {
     --paper: #ffffff;
     --ink: #000000;          
@@ -113,7 +131,7 @@
     --header-h: 84px;
     --font-wordmark: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    --font-serif: "Inter", Georgia, sans-serif;
+    --font-serif: "Newsreader", Georgia, serif;
     --font-nav: "Space Mono", "Courier New", monospace;
   }
 
@@ -129,20 +147,13 @@
 
   body {
     margin: 0;
-    display: flow-root; /* evita il margin-collapsing con .page-fade, non influisce sul position:fixed */
+    display: flow-root;
     background: var(--paper);
     color: var(--ink);
     font-family: var(--font-body);
     font-weight: 300;
     -webkit-font-smoothing: antialiased;
   }
-  /* Wrapper dedicato per il fade-in: qualunque transform (anche translateY(0))
-     su un antenato crea un containing block per i discendenti position:fixed
-     (header, nav-secondary, custom-cursor, e i .nav-btn annidati nelle sezioni),
-     facendoli scorrere con la pagina o posizionarsi nel punto sbagliato invece
-     di restare ancorati al viewport. Si usa margin-top al posto di transform
-     per ottenere lo stesso effetto senza questo rischio.
-  */
   .page-fade {
     opacity: 0;
     margin-top: 12px;
@@ -561,27 +572,34 @@
     width: 100%;
     max-width: 380px;
   }
+
+  /* ▼▼▼ MODIFICA 2: titoli serie +1px e letter-spacing ▼▼▼ */
   .intro-slide h2,
   .about .about-title {
     font-family: var(--font-body);
     font-style: normal;
     font-weight: 500;
     text-transform: none;
-    font-size: 16px;
-    letter-spacing: 0.02em;
+    font-size: 17px;            /* era 16px */
+    letter-spacing: 0.03em;     /* era 0.02em */
     margin: 0 0 11px 0;
     line-height: 1.2;
     color: var(--ink);
   }
+  /* ▲▲▲ FINE MODIFICA 2 ▲▲▲ */
+
+  /* ▼▼▼ MODIFICA 1: corpo serif +1px, line-height +0.1 ▼▼▼ */
   .intro-slide p,
   .about p {
     font-family: var(--font-serif);
-    font-size: 14px;
-    line-height: 1.6;
+    font-size: 15px;            /* era 14px */
+    line-height: 1.7;           /* era 1.6 */
     color: var(--ink-soft);
     font-weight: 400;
     margin: 0;
   }
+  /* ▲▲▲ FINE MODIFICA 1 ▲▲▲ */
+
   .slide-caption strong {
     color: var(--ink);
     font-family: var(--font-nav);
@@ -759,11 +777,15 @@
     padding: 100px 6vw;
     border-top: 1px solid var(--line);
   }
+
+  /* ▼▼▼ MODIFICA 3: colonna più stretta per serif ▼▼▼ */
   .about-content {
-    max-width: 620px;
+    max-width: 600px;           /* era 620px */
     margin: 0;
     font-family: var(--font-serif);
   }
+  /* ▲▲▲ FINE MODIFICA 3 ▲▲▲ */
+
   .about-inner {
     width: 100%;
     display: flex;
@@ -774,12 +796,15 @@
     margin-bottom: 24px;
     text-align: left;
   }
+
+  /* ▼▼▼ MODIFICA 4: quote +1px ▼▼▼ */
   .about-quote {
-    font-size: 13px;
+    font-size: 14px;            /* era 13px */
     color: var(--ink-soft);
     line-height: 1.7;
     font-style: italic;
   }
+  /* ▲▲▲ FINE MODIFICA 4 ▲▲▲ */
 
   /* ---------- ANIMAZIONI ---------- */
   .about-content .about-title {
@@ -941,15 +966,19 @@
     margin-top: 0;
     margin-bottom: 12px;
   }
+
+  /* ▼▼▼ MODIFICA 5: contact link +1px ▼▼▼ */
   section.contact a.contact-link {
     font-family: var(--font-serif);
-    font-size: 14px;
+    font-size: 15px;            /* era 14px */
     font-weight: 400;
     text-decoration: none;
     border-bottom: 1px solid var(--ink-soft);
     padding-bottom: 4px;
     color: var(--ink-soft);
   }
+  /* ▲▲▲ FINE MODIFICA 5 ▲▲▲ */
+
   section.contact a.contact-link:hover {
     color: var(--ink);
     border-bottom-color: var(--ink);
@@ -1018,6 +1047,7 @@
         <div class="slide first-img-slide">
           <img src="img/gradients-01-800.webp"
                srcset="img/gradients-01-400.webp 400w,
+                       img/gradients-01-600.webp 600w,
                        img/gradients-01-800.webp 800w,
                        img/gradients-01-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1028,6 +1058,7 @@
         <div class="slide">
           <img src="img/gradients-02-800.webp"
                srcset="img/gradients-02-400.webp 400w,
+                       img/gradients-02-600.webp 600w,
                        img/gradients-02-800.webp 800w,
                        img/gradients-02-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1038,6 +1069,7 @@
         <div class="slide">
           <img src="img/gradients-03-800.webp"
                srcset="img/gradients-03-400.webp 400w,
+                       img/gradients-03-600.webp 600w,
                        img/gradients-03-800.webp 800w,
                        img/gradients-03-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1048,6 +1080,7 @@
         <div class="slide">
           <img src="img/gradients-04-800.webp"
                srcset="img/gradients-04-400.webp 400w,
+                       img/gradients-04-600.webp 600w,
                        img/gradients-04-800.webp 800w,
                        img/gradients-04-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1058,6 +1091,7 @@
         <div class="slide">
           <img src="img/gradients-05-800.webp"
                srcset="img/gradients-05-400.webp 400w,
+                       img/gradients-05-600.webp 600w,
                        img/gradients-05-800.webp 800w,
                        img/gradients-05-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1068,6 +1102,7 @@
         <div class="slide">
           <img src="img/gradients-06-800.webp"
                srcset="img/gradients-06-400.webp 400w,
+                       img/gradients-06-600.webp 600w,
                        img/gradients-06-800.webp 800w,
                        img/gradients-06-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1078,6 +1113,7 @@
         <div class="slide">
           <img src="img/gradients-07-800.webp"
                srcset="img/gradients-07-400.webp 400w,
+                       img/gradients-07-600.webp 600w,
                        img/gradients-07-800.webp 800w,
                        img/gradients-07-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1088,6 +1124,7 @@
         <div class="slide">
           <img src="img/gradients-08-800.webp"
                srcset="img/gradients-08-400.webp 400w,
+                       img/gradients-08-600.webp 600w,
                        img/gradients-08-800.webp 800w,
                        img/gradients-08-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1116,6 +1153,7 @@
         <div class="slide first-img-slide">
           <img src="img/smokes-01-800.webp"
                srcset="img/smokes-01-400.webp 400w,
+                       img/smokes-01-600.webp 600w,
                        img/smokes-01-800.webp 800w,
                        img/smokes-01-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1126,6 +1164,7 @@
         <div class="slide">
           <img src="img/smokes-02-800.webp"
                srcset="img/smokes-02-400.webp 400w,
+                       img/smokes-02-600.webp 600w,
                        img/smokes-02-800.webp 800w,
                        img/smokes-02-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1136,6 +1175,7 @@
         <div class="slide">
           <img src="img/smokes-03-800.webp"
                srcset="img/smokes-03-400.webp 400w,
+                       img/smokes-03-600.webp 600w,
                        img/smokes-03-800.webp 800w,
                        img/smokes-03-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1146,6 +1186,7 @@
         <div class="slide">
           <img src="img/smokes-04-800.webp"
                srcset="img/smokes-04-400.webp 400w,
+                       img/smokes-04-600.webp 600w,
                        img/smokes-04-800.webp 800w,
                        img/smokes-04-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1156,6 +1197,7 @@
         <div class="slide">
           <img src="img/smokes-05-800.webp"
                srcset="img/smokes-05-400.webp 400w,
+                       img/smokes-05-600.webp 600w,
                        img/smokes-05-800.webp 800w,
                        img/smokes-05-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1184,6 +1226,7 @@
         <div class="slide first-img-slide">
           <img src="img/techs-01-800.webp"
                srcset="img/techs-01-400.webp 400w,
+                       img/techs-01-600.webp 600w,
                        img/techs-01-800.webp 800w,
                        img/techs-01-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1194,6 +1237,7 @@
         <div class="slide">
           <img src="img/techs-02-800.webp"
                srcset="img/techs-02-400.webp 400w,
+                       img/techs-02-600.webp 600w,
                        img/techs-02-800.webp 800w,
                        img/techs-02-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1204,6 +1248,7 @@
         <div class="slide">
           <img src="img/techs-03-800.webp"
                srcset="img/techs-03-400.webp 400w,
+                       img/techs-03-600.webp 600w,
                        img/techs-03-800.webp 800w,
                        img/techs-03-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1214,6 +1259,7 @@
         <div class="slide">
           <img src="img/techs-04-800.webp"
                srcset="img/techs-04-400.webp 400w,
+                       img/techs-04-600.webp 600w,
                        img/techs-04-800.webp 800w,
                        img/techs-04-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1224,6 +1270,7 @@
         <div class="slide">
           <img src="img/techs-05-800.webp"
                srcset="img/techs-05-400.webp 400w,
+                       img/techs-05-600.webp 600w,
                        img/techs-05-800.webp 800w,
                        img/techs-05-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1234,6 +1281,7 @@
         <div class="slide">
           <img src="img/techs-06-800.webp"
                srcset="img/techs-06-400.webp 400w,
+                       img/techs-06-600.webp 600w,
                        img/techs-06-800.webp 800w,
                        img/techs-06-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1244,6 +1292,7 @@
         <div class="slide">
           <img src="img/techs-07-800.webp"
                srcset="img/techs-07-400.webp 400w,
+                       img/techs-07-600.webp 600w,
                        img/techs-07-800.webp 800w,
                        img/techs-07-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1254,6 +1303,7 @@
         <div class="slide">
           <img src="img/techs-08-800.webp"
                srcset="img/techs-08-400.webp 400w,
+                       img/techs-08-600.webp 600w,
                        img/techs-08-800.webp 800w,
                        img/techs-08-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1264,6 +1314,7 @@
         <div class="slide">
           <img src="img/techs-09-800.webp"
                srcset="img/techs-09-400.webp 400w,
+                       img/techs-09-600.webp 600w,
                        img/techs-09-800.webp 800w,
                        img/techs-09-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1274,6 +1325,7 @@
         <div class="slide">
           <img src="img/techs-10-800.webp"
                srcset="img/techs-10-400.webp 400w,
+                       img/techs-10-600.webp 600w,
                        img/techs-10-800.webp 800w,
                        img/techs-10-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1284,6 +1336,7 @@
         <div class="slide">
           <img src="img/techs-11-800.webp"
                srcset="img/techs-11-400.webp 400w,
+                       img/techs-11-600.webp 600w,
                        img/techs-11-800.webp 800w,
                        img/techs-11-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1294,6 +1347,7 @@
         <div class="slide">
           <img src="img/techs-12-800.webp"
                srcset="img/techs-12-400.webp 400w,
+                       img/techs-12-600.webp 600w,
                        img/techs-12-800.webp 800w,
                        img/techs-12-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1304,6 +1358,7 @@
         <div class="slide">
           <img src="img/techs-13-800.webp"
                srcset="img/techs-13-400.webp 400w,
+                       img/techs-13-600.webp 600w,
                        img/techs-13-800.webp 800w,
                        img/techs-13-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1314,6 +1369,7 @@
         <div class="slide">
           <img src="img/techs-14-800.webp"
                srcset="img/techs-14-400.webp 400w,
+                       img/techs-14-600.webp 600w,
                        img/techs-14-800.webp 800w,
                        img/techs-14-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1324,6 +1380,7 @@
         <div class="slide">
           <img src="img/techs-15-800.webp"
                srcset="img/techs-15-400.webp 400w,
+                       img/techs-15-600.webp 600w,
                        img/techs-15-800.webp 800w,
                        img/techs-15-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1352,6 +1409,7 @@
         <div class="slide first-img-slide">
           <img src="img/memories-01-800.webp"
                srcset="img/memories-01-400.webp 400w,
+                       img/memories-01-600.webp 600w,
                        img/memories-01-800.webp 800w,
                        img/memories-01-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1362,6 +1420,7 @@
         <div class="slide">
           <img src="img/memories-02-800.webp"
                srcset="img/memories-02-400.webp 400w,
+                       img/memories-02-600.webp 600w,
                        img/memories-02-800.webp 800w,
                        img/memories-02-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1372,6 +1431,7 @@
         <div class="slide">
           <img src="img/memories-03-800.webp"
                srcset="img/memories-03-400.webp 400w,
+                       img/memories-03-600.webp 600w,
                        img/memories-03-800.webp 800w,
                        img/memories-03-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1382,6 +1442,7 @@
         <div class="slide">
           <img src="img/memories-04-800.webp"
                srcset="img/memories-04-400.webp 400w,
+                       img/memories-04-600.webp 600w,
                        img/memories-04-800.webp 800w,
                        img/memories-04-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1392,6 +1453,7 @@
         <div class="slide">
           <img src="img/memories-05-800.webp"
                srcset="img/memories-05-400.webp 400w,
+                       img/memories-05-600.webp 600w,
                        img/memories-05-800.webp 800w,
                        img/memories-05-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1402,6 +1464,7 @@
         <div class="slide">
           <img src="img/memories-06-800.webp"
                srcset="img/memories-06-400.webp 400w,
+                       img/memories-06-600.webp 600w,
                        img/memories-06-800.webp 800w,
                        img/memories-06-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1412,6 +1475,7 @@
         <div class="slide">
           <img src="img/memories-07-800.webp"
                srcset="img/memories-07-400.webp 400w,
+                       img/memories-07-600.webp 600w,
                        img/memories-07-800.webp 800w,
                        img/memories-07-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1422,6 +1486,7 @@
         <div class="slide">
           <img src="img/memories-08-800.webp"
                srcset="img/memories-08-400.webp 400w,
+                       img/memories-08-600.webp 600w,
                        img/memories-08-800.webp 800w,
                        img/memories-08-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1432,6 +1497,7 @@
         <div class="slide">
           <img src="img/memories-09-800.webp"
                srcset="img/memories-09-400.webp 400w,
+                       img/memories-09-600.webp 600w,
                        img/memories-09-800.webp 800w,
                        img/memories-09-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1442,6 +1508,7 @@
         <div class="slide">
           <img src="img/memories-10-800.webp"
                srcset="img/memories-10-400.webp 400w,
+                       img/memories-10-600.webp 600w,
                        img/memories-10-800.webp 800w,
                        img/memories-10-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1452,6 +1519,7 @@
         <div class="slide">
           <img src="img/memories-11-800.webp"
                srcset="img/memories-11-400.webp 400w,
+                       img/memories-11-600.webp 600w,
                        img/memories-11-800.webp 800w,
                        img/memories-11-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1462,6 +1530,7 @@
         <div class="slide">
           <img src="img/memories-12-800.webp"
                srcset="img/memories-12-400.webp 400w,
+                       img/memories-12-600.webp 600w,
                        img/memories-12-800.webp 800w,
                        img/memories-12-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1472,6 +1541,7 @@
         <div class="slide">
           <img src="img/memories-13-800.webp"
                srcset="img/memories-13-400.webp 400w,
+                       img/memories-13-600.webp 600w,
                        img/memories-13-800.webp 800w,
                        img/memories-13-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1482,6 +1552,7 @@
         <div class="slide">
           <img src="img/memories-14-800.webp"
                srcset="img/memories-14-400.webp 400w,
+                       img/memories-14-600.webp 600w,
                        img/memories-14-800.webp 800w,
                        img/memories-14-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1492,6 +1563,7 @@
         <div class="slide">
           <img src="img/memories-15-800.webp"
                srcset="img/memories-15-400.webp 400w,
+                       img/memories-15-600.webp 600w,
                        img/memories-15-800.webp 800w,
                        img/memories-15-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1502,6 +1574,7 @@
         <div class="slide">
           <img src="img/memories-16-800.webp"
                srcset="img/memories-16-400.webp 400w,
+                       img/memories-16-600.webp 600w,
                        img/memories-16-800.webp 800w,
                        img/memories-16-1200.webp 1200w"
                sizes="(max-width: 800px) 84vw, 606px"
@@ -1512,6 +1585,7 @@
       </div>
     </div>
   </section>
+
   <!-- ABOUT & BIO -->
   <section class="about" id="about">
     <div class="about-inner">
