@@ -17,12 +17,12 @@
 <meta property="og:site_name" content="Simone Giordano">
 <meta property="og:title" content="Simone Giordano — Painter">
 <meta property="og:description" content="Simone Giordano's painting portfolio. Paintings and series: Gradients, Smokes, Techs and Memories. Lives and works in Rome.">
-<meta property="og:image" content="https://www.simonegiordano.net/img/gradients-01.jpg">
+<meta property="og:image" content="https://www.simonegiordano.net/img/gradients-01-1200.webp">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Simone Giordano — Painter">
 <meta name="twitter:description" content="Simone Giordano's painting portfolio. Paintings and series: Gradients, Smokes, Techs and Memories. Lives and works in Rome.">
-<meta name="twitter:image" content="https://www.simonegiordano.net/img/gradients-01.jpg">
+<meta name="twitter:image" content="https://www.simonegiordano.net/img/gradients-01-1200.webp">
 
 <!-- Vercel Web Analytics -->
 <script>
@@ -31,16 +31,10 @@
 <script defer src="/_vercel/insights/script.js"></script>
 
 <!-- Preload hero image (LCP) -->
-<link rel="preload" as="image" href="img/galerie-sator.jpg" fetchpriority="high">
-
+<link rel="preload" as="image" href="img/galerie-sator-1200.webp" imagesrcset="img/galerie-sator-400.webp 400w, img/galerie-sator-800.webp 800w, img/galerie-sator-1200.webp 1200w" imagesizes="100vw" fetchpriority="high">
 <!-- Favicon -->
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%23ffffff%22/%3E%3Ctext x=%2250%22 y=%2257%22 font-family=%22-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif%22 font-weight=%22900%22 font-size=%2242%22 fill=%22%23000000%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3ESG%3C/text%3E%3C/svg%3E" type="image/svg+xml">
-
-<!-- Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
 <!-- Structured Data (JSON-LD) -->
 <script type="application/ld+json">
@@ -60,6 +54,70 @@
 </script>
 
 <style>
+  /* ---------- Font self-hosted ---------- */
+
+  /* Inter 300 (Light) */
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url('fonts/inter-v18-latin-300.woff2') format('woff2');
+  }
+
+  /* Inter 400 (Regular) */
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('fonts/inter-v18-latin-regular.woff2') format('woff2');
+  }
+
+  /* Inter 500 (Medium) */
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('fonts/inter-v18-latin-500.woff2') format('woff2');
+  }
+
+  /* Inter 600 (SemiBold) */
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('fonts/inter-v18-latin-600.woff2') format('woff2');
+  }
+
+  /* Inter 800 (ExtraBold) */
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+    src: url('fonts/inter-v18-latin-800.woff2') format('woff2');
+  }
+
+  /* Space Mono 400 (Regular) */
+  @font-face {
+    font-family: 'Space Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('fonts/space-mono-v13-latin-regular.woff2') format('woff2');
+  }
+
+  /* Space Mono 700 (Bold) */
+  @font-face {
+    font-family: 'Space Mono';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('fonts/space-mono-v13-latin-700.woff2') format('woff2');
+  }
   :root {
     --paper: #ffffff;
     --ink: #000000;          
@@ -329,7 +387,7 @@
     justify-content: center;
     text-align: center;
     padding: 0 6vw;
-    background: #000 url('img/galerie-sator.jpg') center / cover no-repeat;
+        background: #000 url('img/galerie-sator-1200.webp') center / cover no-repeat;
   }
   .hero::before {
     content: "";
@@ -767,7 +825,11 @@
     font-style: italic;
   }
 
-  /* ---------- About reveal animation (minimal: line + letter-spacing + fade) ---------- */
+   /* ============================================================
+     ANIMAZIONI
+     ============================================================ */
+
+  /* ---------- About: titolo + paragrafi riga per riga ---------- */
   .about-content .about-title {
     position: relative;
     display: inline-block;
@@ -781,27 +843,27 @@
     letter-spacing: 0.04em;
   }
 
+  /* Paragrafi About: tendina riga per riga con background-clip */
   .about-content p {
-    opacity: 0;
-    transform: translateY(8px);
-    transition: opacity 1.3s ease .4s, transform 1.3s ease .4s;
+    background-image: linear-gradient(to bottom, var(--ink-soft) 0%, var(--ink-soft) 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 0%;
+    background-position: 0 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: var(--ink-soft);
+    transition: background-size 1.6s cubic-bezier(0.4, 0, 0.2, 1);
   }
   .about-content.in-view p {
-    opacity: 1;
-    transform: translateY(0);
+    background-size: 100% 100%;
   }
+  .about-content p:nth-of-type(1) { transition-delay: 0.2s; }
+  .about-content p:nth-of-type(2) { transition-delay: 0.5s; }
+  .about-content p:nth-of-type(3) { transition-delay: 0.8s; }
+  .about-content p:nth-of-type(4) { transition-delay: 1.1s; }
 
-  @media (prefers-reduced-motion: reduce) {
-    .about-content .about-title,
-    .about-content p {
-      opacity: 1 !important;
-      letter-spacing: 0.04em !important;
-      transform: none !important;
-      transition: none !important;
-    }
-  }
-
-  /* ---------- Intro slides reveal (same language as About, shorter delay) ---------- */
+  /* ---------- Intro slides: reveal titoli gallerie ---------- */
   .intro-inner h2 {
     position: relative;
     display: inline-block;
@@ -824,7 +886,7 @@
     transform: translateY(0);
   }
 
-  /* ---------- Contact reveal (same language as About, longer delay) ---------- */
+  /* ---------- Contact: reveal ---------- */
   .contact-container .contact-text {
     display: block;
     opacity: 0;
@@ -845,19 +907,24 @@
     transform: translateY(0);
   }
 
+  /* ---------- Prefers-reduced-motion: tutto statico ---------- */
   @media (prefers-reduced-motion: reduce) {
+    .about-content .about-title,
+    .about-content p,
+    .cv-block,
     .intro-inner h2,
     .intro-inner p,
     .contact-container .contact-text,
     .contact-container .contact-link {
       opacity: 1 !important;
-      letter-spacing: 0.02em !important;
+      letter-spacing: 0.04em !important;
       transform: none !important;
       transition: none !important;
+      background-size: 100% 100% !important;
     }
   }
 
-  /* ---------- CV ---------- */
+      /* ---------- CV: layout + dissolvenza ---------- */
   .cv-block {
     max-width: 860px;
     width: 100%;
@@ -865,7 +932,15 @@
     padding-top: 36px;
     border-top: 1px solid var(--line);
     font-family: var(--font-body);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 1.2s ease 1.8s, transform 1.2s ease 1.8s;
   }
+  .about-content.in-view ~ .cv-block {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   .cv-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -994,35 +1069,83 @@
           </div>
         </div>
         <div class="slide first-img-slide">
-          <img src="img/gradients-01.jpg" width="1215" height="1215" alt="FForward" loading="lazy" decoding="async">
+          <img src="img/gradients-01-800.webp"
+               srcset="img/gradients-01-400.webp 400w,
+                       img/gradients-01-800.webp 800w,
+                       img/gradients-01-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1215" height="1215"
+               alt="FForward" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>FForward</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2014, Oil on canvas, 50 × 40 cm<span class="slide-counter">01 / 08</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/gradients-02.jpg" width="961" height="1200" alt="Keep Calm" loading="lazy" decoding="async">
+          <img src="img/gradients-02-800.webp"
+               srcset="img/gradients-02-400.webp 400w,
+                       img/gradients-02-800.webp 800w,
+                       img/gradients-02-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="961" height="1200"
+               alt="Keep Calm" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>Keep Calm</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2014, Oil on canvas, 50 × 50 cm<span class="slide-counter">02 / 08</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/gradients-03.jpg" width="1749" height="1215" alt="Preimposed Order" loading="lazy" decoding="async">
+          <img src="img/gradients-03-800.webp"
+               srcset="img/gradients-03-400.webp 400w,
+                       img/gradients-03-800.webp 800w,
+                       img/gradients-03-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1749" height="1215"
+               alt="Preimposed Order" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>Preimposed Order</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2013, Oil on canvas, 120 × 170 cm<span class="slide-counter">03 / 08</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/gradients-04.jpg" width="1696" height="1215" alt="Trying to Forget" loading="lazy" decoding="async">
+          <img src="img/gradients-04-800.webp"
+               srcset="img/gradients-04-400.webp 400w,
+                       img/gradients-04-800.webp 800w,
+                       img/gradients-04-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1696" height="1215"
+               alt="Trying to Forget" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>Trying to Forget</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2014, Oil on panel, 70 × 50 cm<span class="slide-counter">04 / 08</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/gradients-05.jpg" width="974" height="1215" alt="Undrawing" loading="lazy" decoding="async">
+          <img src="img/gradients-05-800.webp"
+               srcset="img/gradients-05-400.webp 400w,
+                       img/gradients-05-800.webp 800w,
+                       img/gradients-05-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="974" height="1215"
+               alt="Undrawing" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>Undrawing</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2014, Oil on canvas, 50 × 40 cm<span class="slide-counter">05 / 08</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/gradients-06.jpg" width="1629" height="1215" alt="Again and Again and Again an…" loading="lazy" decoding="async">
+          <img src="img/gradients-06-800.webp"
+               srcset="img/gradients-06-400.webp 400w,
+                       img/gradients-06-800.webp 800w,
+                       img/gradients-06-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1629" height="1215"
+               alt="Again and Again and Again an…" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>Again and Again and Again an…</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2014, Oil on canvas, 40 × 30 cm<span class="slide-counter">06 / 08</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/gradients-07.jpg" width="1659" height="1215" alt="Raw Glitch Experiment 01" loading="lazy" decoding="async">
+          <img src="img/gradients-07-800.webp"
+               srcset="img/gradients-07-400.webp 400w,
+                       img/gradients-07-800.webp 800w,
+                       img/gradients-07-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1659" height="1215"
+               alt="Raw Glitch Experiment 01" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>Raw Glitch Experiment 01</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2014, Oil on canvas, 40 × 60 cm<span class="slide-counter">07 / 08</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/gradients-08.jpg" width="2739" height="1215" alt="Raw Glitch Experiment 02" loading="lazy" decoding="async">
+          <img src="img/gradients-08-800.webp"
+               srcset="img/gradients-08-400.webp 400w,
+                       img/gradients-08-800.webp 800w,
+                       img/gradients-08-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="2739" height="1215"
+               alt="Raw Glitch Experiment 02" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>Raw Glitch Experiment 02</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2014, Oil on canvas, 50 × 110 cm<span class="slide-counter">08 / 08</span></span></div>
         </div>
       </div>
@@ -1044,23 +1167,53 @@
           </div>
         </div>
         <div class="slide first-img-slide">
-          <img src="img/smokes-01.jpg" width="1215" height="1215" alt="496" loading="lazy" decoding="async">
+          <img src="img/smokes-01-800.webp"
+               srcset="img/smokes-01-400.webp 400w,
+                       img/smokes-01-800.webp 800w,
+                       img/smokes-01-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1215" height="1215"
+               alt="496" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>496</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2013, Oil on canvas, 60 × 40 cm<span class="slide-counter">01 / 05</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/smokes-02.jpg" width="1014" height="1215" alt="952" loading="lazy" decoding="async">
+          <img src="img/smokes-02-800.webp"
+               srcset="img/smokes-02-400.webp 400w,
+                       img/smokes-02-800.webp 800w,
+                       img/smokes-02-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1014" height="1215"
+               alt="952" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>952</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2013, Oil on canvas, 70 × 50 cm<span class="slide-counter">02 / 05</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/smokes-03.jpg" width="1578" height="1250" alt="Kiss Inger" loading="lazy" decoding="async">
+          <img src="img/smokes-03-800.webp"
+               srcset="img/smokes-03-400.webp 400w,
+                       img/smokes-03-800.webp 800w,
+                       img/smokes-03-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1578" height="1250"
+               alt="Kiss Inger" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>Kiss Inger</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2013, Oil on canvas, 70 × 50 cm<span class="slide-counter">03 / 05</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/smokes-04.jpg" width="1037" height="1215" alt="398" loading="lazy" decoding="async">
+          <img src="img/smokes-04-800.webp"
+               srcset="img/smokes-04-400.webp 400w,
+                       img/smokes-04-800.webp 800w,
+                       img/smokes-04-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1037" height="1215"
+               alt="398" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>398</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2013, Oil on canvas, 70 × 50 cm<span class="slide-counter">04 / 05</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/smokes-05.jpg" width="961" height="1215" alt="441" loading="lazy" decoding="async">
+          <img src="img/smokes-05-800.webp"
+               srcset="img/smokes-05-400.webp 400w,
+                       img/smokes-05-800.webp 800w,
+                       img/smokes-05-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="961" height="1215"
+               alt="441" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>441</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2013, Oil on canvas, 40 × 40 cm<span class="slide-counter">05 / 05</span></span></div>
         </div>
       </div>
@@ -1082,63 +1235,153 @@
           </div>
         </div>
         <div class="slide first-img-slide">
-          <img src="img/techs-01.jpg" width="1215" height="1215" alt="Tangless" loading="lazy" decoding="async">
+          <img src="img/techs-01-800.webp"
+               srcset="img/techs-01-400.webp 400w,
+                       img/techs-01-800.webp 800w,
+                       img/techs-01-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1215" height="1215"
+               alt="Tangless" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>Tangless</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on canvas on board, 30 × 30 cm<span class="slide-counter">01 / 15</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/techs-02.jpg" width="971" height="1215" alt="Made to Sedate" loading="lazy" decoding="async">
+          <img src="img/techs-02-800.webp"
+               srcset="img/techs-02-400.webp 400w,
+                       img/techs-02-800.webp 800w,
+                       img/techs-02-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="971" height="1215"
+               alt="Made to Sedate" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>Made to Sedate</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on Mylar, 120 × 160 cm<span class="slide-counter">02 / 15</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/techs-03.jpg" width="1569" height="1215" alt="Burned" loading="lazy" decoding="async">
+          <img src="img/techs-03-800.webp"
+               srcset="img/techs-03-400.webp 400w,
+                       img/techs-03-800.webp 800w,
+                       img/techs-03-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1569" height="1215"
+               alt="Burned" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>Burned</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on Mylar, 40 × 30 cm<span class="slide-counter">03 / 15</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/techs-04.jpg" width="1642" height="1215" alt="Spring" loading="lazy" decoding="async">
+          <img src="img/techs-04-800.webp"
+               srcset="img/techs-04-400.webp 400w,
+                       img/techs-04-800.webp 800w,
+                       img/techs-04-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1642" height="1215"
+               alt="Spring" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>Spring</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on Mylar, 40 × 30 cm<span class="slide-counter">04 / 15</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/techs-05.jpg" width="971" height="1215" alt="My Left Hand" loading="lazy" decoding="async">
+          <img src="img/techs-05-800.webp"
+               srcset="img/techs-05-400.webp 400w,
+                       img/techs-05-800.webp 800w,
+                       img/techs-05-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="971" height="1215"
+               alt="My Left Hand" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>My Left Hand</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on Mylar, 60 × 60 cm<span class="slide-counter">05 / 15</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/techs-06.jpg" width="1704" height="1215" alt="This Is How I'm Made" loading="lazy" decoding="async">
+          <img src="img/techs-06-800.webp"
+               srcset="img/techs-06-400.webp 400w,
+                       img/techs-06-800.webp 800w,
+                       img/techs-06-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1704" height="1215"
+               alt="This Is How I'm Made" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>This Is How I'm Made</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on canvas on board, 35 × 25 cm<span class="slide-counter">06 / 15</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/techs-07.jpg" width="1172" height="1215" alt="Bugs" loading="lazy" decoding="async">
+          <img src="img/techs-07-800.webp"
+               srcset="img/techs-07-400.webp 400w,
+                       img/techs-07-800.webp 800w,
+                       img/techs-07-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1172" height="1215"
+               alt="Bugs" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>Bugs</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on canvas on board, 30 × 30 cm<span class="slide-counter">07 / 15</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/techs-08.jpg" width="1230" height="1215" alt="The Origin of the World" loading="lazy" decoding="async">
+          <img src="img/techs-08-800.webp"
+               srcset="img/techs-08-400.webp 400w,
+                       img/techs-08-800.webp 800w,
+                       img/techs-08-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1230" height="1215"
+               alt="The Origin of the World" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>The Origin of the World</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on canvas on board, 30 × 30 cm<span class="slide-counter">08 / 15</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/techs-09.jpg" width="1225" height="1215" alt="Sick Mama" loading="lazy" decoding="async">
+          <img src="img/techs-09-800.webp"
+               srcset="img/techs-09-400.webp 400w,
+                       img/techs-09-800.webp 800w,
+                       img/techs-09-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1225" height="1215"
+               alt="Sick Mama" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>Sick Mama</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on canvas on board, 30 × 30 cm<span class="slide-counter">09 / 15</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/techs-10.jpg" width="1234" height="1215" alt="Entertainm3nt" loading="lazy" decoding="async">
+          <img src="img/techs-10-800.webp"
+               srcset="img/techs-10-400.webp 400w,
+                       img/techs-10-800.webp 800w,
+                       img/techs-10-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1234" height="1215"
+               alt="Entertainm3nt" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>Entertainm3nt</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on canvas on board, 30 × 30 cm<span class="slide-counter">10 / 15</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/techs-11.jpg" width="1215" height="1215" alt="And My Friend" loading="lazy" decoding="async">
+          <img src="img/techs-11-800.webp"
+               srcset="img/techs-11-400.webp 400w,
+                       img/techs-11-800.webp 800w,
+                       img/techs-11-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1215" height="1215"
+               alt="And My Friend" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>And My Friend</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on board, 30 × 30 cm<span class="slide-counter">11 / 15</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/techs-12.jpg" width="1219" height="1215" alt="First Love" loading="lazy" decoding="async">
+          <img src="img/techs-12-800.webp"
+               srcset="img/techs-12-400.webp 400w,
+                       img/techs-12-800.webp 800w,
+                       img/techs-12-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1219" height="1215"
+               alt="First Love" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>First Love</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on board, 30 × 30 cm<span class="slide-counter">12 / 15</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/techs-13.jpg" width="1215" height="1215" alt="Time Is Everything" loading="lazy" decoding="async">
+          <img src="img/techs-13-800.webp"
+               srcset="img/techs-13-400.webp 400w,
+                       img/techs-13-800.webp 800w,
+                       img/techs-13-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1215" height="1215"
+               alt="Time Is Everything" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>Time Is Everything</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on board, 30 × 30 cm<span class="slide-counter">13 / 15</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/techs-14.jpg" width="2268" height="1215" alt="Bete" loading="lazy" decoding="async">
+          <img src="img/techs-14-800.webp"
+               srcset="img/techs-14-400.webp 400w,
+                       img/techs-14-800.webp 800w,
+                       img/techs-14-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="2268" height="1215"
+               alt="Bete" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>Bete</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on board, 100 × 15 cm<span class="slide-counter">14 / 15</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/techs-15.jpg" width="1549" height="1215" alt="No Longer" loading="lazy" decoding="async">
+          <img src="img/techs-15-800.webp"
+               srcset="img/techs-15-400.webp 400w,
+                       img/techs-15-800.webp 800w,
+                       img/techs-15-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1549" height="1215"
+               alt="No Longer" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>No Longer</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on canvas, 70 × 50 cm<span class="slide-counter">15 / 15</span></span></div>
         </div>
       </div>
@@ -1160,73 +1403,168 @@
           </div>
         </div>
         <div class="slide first-img-slide">
-          <img src="img/memories-01.jpg" width="1215" height="1215" alt="First" loading="lazy" decoding="async">
+          <img src="img/memories-01-800.webp"
+               srcset="img/memories-01-400.webp 400w,
+                       img/memories-01-800.webp 800w,
+                       img/memories-01-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1215" height="1215"
+               alt="First" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>First</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2011, Oil on board, 30 × 30 cm<span class="slide-counter">01 / 16</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/memories-02.jpg" width="1674" height="1215" alt="Where I End and You Begin" loading="lazy" decoding="async">
+          <img src="img/memories-02-800.webp"
+               srcset="img/memories-02-400.webp 400w,
+                       img/memories-02-800.webp 800w,
+                       img/memories-02-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1674" height="1215"
+               alt="Where I End and You Begin" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>Where I End and You Begin</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2013, Oil on canvas, 190 × 150 cm<span class="slide-counter">02 / 16</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/memories-03.jpg" width="1213" height="1215" alt="Carry Me On" loading="lazy" decoding="async">
+          <img src="img/memories-03-800.webp"
+               srcset="img/memories-03-400.webp 400w,
+                       img/memories-03-800.webp 800w,
+                       img/memories-03-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1213" height="1215"
+               alt="Carry Me On" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>Carry Me On</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2011, Oil on board, 30 × 30 cm<span class="slide-counter">03 / 16</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/memories-04.jpg" width="1209" height="1215" alt="Great" loading="lazy" decoding="async">
+          <img src="img/memories-04-800.webp"
+               srcset="img/memories-04-400.webp 400w,
+                       img/memories-04-800.webp 800w,
+                       img/memories-04-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1209" height="1215"
+               alt="Great" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>Great</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on board, 30 × 30 cm<span class="slide-counter">04 / 16</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/memories-05.jpg" width="1212" height="1215" alt="GranMa" loading="lazy" decoding="async">
+          <img src="img/memories-05-800.webp"
+               srcset="img/memories-05-400.webp 400w,
+                       img/memories-05-800.webp 800w,
+                       img/memories-05-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1212" height="1215"
+               alt="GranMa" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>GranMa</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2011, Oil on board, 30 × 30 cm<span class="slide-counter">05 / 16</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/memories-06.jpg" width="1217" height="1215" alt="First Time I Meet Death" loading="lazy" decoding="async">
+          <img src="img/memories-06-800.webp"
+               srcset="img/memories-06-400.webp 400w,
+                       img/memories-06-800.webp 800w,
+                       img/memories-06-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1217" height="1215"
+               alt="First Time I Meet Death" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>First Time I Meet Death</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2011, Oil on board, 30 × 30 cm<span class="slide-counter">06 / 16</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/memories-07.jpg" width="1225" height="1215" alt="Always" loading="lazy" decoding="async">
+          <img src="img/memories-07-800.webp"
+               srcset="img/memories-07-400.webp 400w,
+                       img/memories-07-800.webp 800w,
+                       img/memories-07-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1225" height="1215"
+               alt="Always" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>Always</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2013, Oil on board, 30 × 30 cm<span class="slide-counter">07 / 16</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/memories-08.jpg" width="1215" height="1215" alt="Starry" loading="lazy" decoding="async">
+          <img src="img/memories-08-800.webp"
+               srcset="img/memories-08-400.webp 400w,
+                       img/memories-08-800.webp 800w,
+                       img/memories-08-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1215" height="1215"
+               alt="Starry" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>Starry</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2011, Oil on board, 30 × 30 cm<span class="slide-counter">08 / 16</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/memories-09.jpg" width="1202" height="1215" alt="Friend" loading="lazy" decoding="async">
+          <img src="img/memories-09-800.webp"
+               srcset="img/memories-09-400.webp 400w,
+                       img/memories-09-800.webp 800w,
+                       img/memories-09-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1202" height="1215"
+               alt="Friend" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>Friend</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on board, 30 × 30 cm<span class="slide-counter">09 / 16</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/memories-10.jpg" width="1225" height="1215" alt="Unforgettable" loading="lazy" decoding="async">
+          <img src="img/memories-10-800.webp"
+               srcset="img/memories-10-400.webp 400w,
+                       img/memories-10-800.webp 800w,
+                       img/memories-10-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1225" height="1215"
+               alt="Unforgettable" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>Unforgettable</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2011, Oil on board, 30 × 30 cm<span class="slide-counter">10 / 16</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/memories-11.jpg" width="1212" height="1215" alt="Fake" loading="lazy" decoding="async">
+          <img src="img/memories-11-800.webp"
+               srcset="img/memories-11-400.webp 400w,
+                       img/memories-11-800.webp 800w,
+                       img/memories-11-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1212" height="1215"
+               alt="Fake" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>Fake</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2012, Oil on board, 30 × 30 cm<span class="slide-counter">11 / 16</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/memories-12.jpg" width="1214" height="1215" alt="Puglia" loading="lazy" decoding="async">
+          <img src="img/memories-12-800.webp"
+               srcset="img/memories-12-400.webp 400w,
+                       img/memories-12-800.webp 800w,
+                       img/memories-12-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1214" height="1215"
+               alt="Puglia" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>Puglia</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2011, Oil on board, 30 × 30 cm<span class="slide-counter">12 / 16</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/memories-13.jpg" width="1236" height="1215" alt="Enough" loading="lazy" decoding="async">
+          <img src="img/memories-13-800.webp"
+               srcset="img/memories-13-400.webp 400w,
+                       img/memories-13-800.webp 800w,
+                       img/memories-13-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1236" height="1215"
+               alt="Enough" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>Enough</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2011, Oil on board, 30 × 30 cm<span class="slide-counter">13 / 16</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/memories-14.jpg" width="1201" height="1215" alt="Where" loading="lazy" decoding="async">
+          <img src="img/memories-14-800.webp"
+               srcset="img/memories-14-400.webp 400w,
+                       img/memories-14-800.webp 800w,
+                       img/memories-14-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1201" height="1215"
+               alt="Where" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>Where</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2011, Oil on board, 30 × 30 cm<span class="slide-counter">14 / 16</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/memories-15.jpg" width="1207" height="1215" alt="All" loading="lazy" decoding="async">
+          <img src="img/memories-15-800.webp"
+               srcset="img/memories-15-400.webp 400w,
+                       img/memories-15-800.webp 800w,
+                       img/memories-15-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1207" height="1215"
+               alt="All" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>All</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2011, Oil on board, 30 × 30 cm<span class="slide-counter">15 / 16</span></span></div>
         </div>
         <div class="slide">
-          <img src="img/memories-16.jpg" width="1232" height="1215" alt="You" loading="lazy" decoding="async">
+          <img src="img/memories-16-800.webp"
+               srcset="img/memories-16-400.webp 400w,
+                       img/memories-16-800.webp 800w,
+                       img/memories-16-1200.webp 1200w"
+               sizes="(max-width: 800px) 84vw, 606px"
+               width="1232" height="1215"
+               alt="You" loading="lazy" decoding="async">
           <div class="slide-caption"><strong>You</strong><span class="cap-meta"><span class="cap-sep">&nbsp;— </span>2013, Oil on canvas, 190 × 150 cm<span class="slide-counter">16 / 16</span></span></div>
         </div>
       </div>
     </div>
   </section>
-
   <!-- ABOUT & BIO -->
   <section class="about" id="about">
     <div class="about-inner">
@@ -1411,8 +1749,6 @@
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
     // ---------- Contatori slide calcolati dinamicamente ----------
-    // Evita di dover aggiornare a mano "01 / 08" ecc. ogni volta che si
-    // aggiunge, toglie o riordina un'opera in una galleria.
     document.querySelectorAll('.slider-container').forEach((slider) => {
       const counters = Array.from(slider.querySelectorAll('.slide-counter'));
       const total = counters.length;
@@ -1458,13 +1794,6 @@
             if (nextBtn) nextBtn.classList.remove('hover-visible');
           }
         });
-        // Niente 'mouseleave' qui: i bottoni "← Drag"/"Drag →" e il testo
-        // dell'intro-slide sono fratelli DOM di .slide (non discendenti), pur
-        // sovrapponendosi visivamente. Un mouseleave attaccato allo .slide
-        // scatterebbe appena il puntatore entra in uno di loro, facendo
-        // sparire il bottone proprio mentre ci si passa sopra. Il nascondimento
-        // "vero" (mouse che lascia del tutto la galleria) è gestito più sotto
-        // con un listener sullo .slider-wrapper, comune a slide e bottoni.
       }
 
       slide.addEventListener('click', (e) => {
@@ -1620,10 +1949,6 @@
           if (inZone) {
             if (customCursorLabel) customCursorLabel.textContent = 'Scroll ↓';
             customCursor.classList.add('visible');
-            // Dim coerente con "Drag": l'etichetta resta pointer-events:none
-            // (il click deve continuare a passare alla hero sottostante),
-            // quindi l'hover si rileva qui via bounding box invece che con
-            // :hover CSS.
             const labelRect = customCursor.getBoundingClientRect();
             const overLabel = e.clientX >= labelRect.left && e.clientX <= labelRect.right &&
               e.clientY >= labelRect.top && e.clientY <= labelRect.bottom;
@@ -1642,8 +1967,7 @@
       }
     }
 
-    // ---------- "Scroll ↓" fisso su touch (niente hover: mostralo finché
-    // l'hero è in vista, invece di legarlo alla vicinanza del mouse) ----------
+    // ---------- "Scroll ↓" fisso su touch ----------
     if (customCursor && heroSection && !hoverCapable) {
       const heroTouchObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
@@ -1683,8 +2007,6 @@
       entries.forEach(entry => {
         const state = sectionState.get(entry.target);
         if (!state) return;
-        // Usato dai bottoni "← Drag"/"Drag →" fissi per sapere quale
-        // galleria mostrare permanentemente su touch (niente hover lì).
         entry.target.classList.toggle('gallery-in-view', entry.isIntersecting);
         if (entry.isIntersecting) {
           if (state.needsReset) {
@@ -1718,10 +2040,6 @@
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(() => {
-        // Su mobile/tablet, mostrare/nascondere la barra degli indirizzi durante lo
-        // scroll verticale genera un evento "resize" che cambia solo l'altezza della
-        // finestra, non la larghezza. Ignoriamo questi casi per evitare di riposizionare
-        // inutilmente le gallerie orizzontali (causa dell'effetto di "compressione").
         if (window.innerWidth === lastViewportWidth) return;
         lastViewportWidth = window.innerWidth;
         if (isMobileLayout()) return;
@@ -1742,7 +2060,7 @@
         });
       }, 150);
     });
-    // ---------- About: minimal reveal (line + fade) ----------
+    // ---------- About: minimal reveal ----------
     const aboutContent = document.querySelector('.about-content');
     if (aboutContent) {
       const aboutObserver = new IntersectionObserver((entries) => {
@@ -1756,7 +2074,7 @@
       aboutObserver.observe(aboutContent);
     }
 
-    // ---------- Intro slides (gallery titles): same reveal, shorter delay ----------
+    // ---------- Intro slides reveal ----------
     const introInners = document.querySelectorAll('.intro-inner');
     if (introInners.length) {
       const introObserver = new IntersectionObserver((entries) => {
@@ -1770,7 +2088,7 @@
       introInners.forEach((el) => introObserver.observe(el));
     }
 
-    // ---------- Contact: same reveal, longer delay ----------
+    // ---------- Contact reveal ----------
     const contactContainer = document.querySelector('.contact-container');
     if (contactContainer) {
       const contactObserver = new IntersectionObserver((entries) => {
